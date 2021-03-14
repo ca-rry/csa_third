@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var data = {
+              age: 18,
+              name: "liuruchao",
+              education: ["小学", "初中", "高中", "大学", undefined, null],
+              likesFood: new Set(["fish", "banana"]),
+              friends: [
+                    { name: "summer",  sex: "woman"},
+                    { name: "daWen",   sex: "woman"},
+                    { name: "yang",    sex: "man" }  ], 
+              work: { 
+                      time: "2019", 
+                      project: { name: "test",obtain: ["css", "html", "js"]} 
+                    }, 
+              play: function() {    console.log('玩滑板');  },
+          }
+    var newdata={};
+   function deepClone(oldobj,newobj){
+       for(let k in oldobj){
+           let item=oldobj[k];
+           if(item instanceof Array){  //先判断是否为数祖（数组也是对象），是的话则返回true 
+            newobj[k]=[];               //创建空数组
+            deepClone(item,newobj[k]);   //递归
+           }
+           else if(item instanceof Set){  //再判断是否为Set数据类型(Set也是对象)
+              newobj[k]=data[k];        //Set数据类型是构造函数，地址不同，可直接赋值
+           }
+           else if(item instanceof Function){     //找到data中的函数并赋值
+                newobj[k]=item;
+            }
+           else if(item instanceof Object)
+             {   
+               newobj[k]={};
+               deepClone(item,newobj[k]);
+            }
+           else {
+               newobj[k]=item;     //简单数据类型直接赋值
+           }
+       }
+       return newobj;
+   }
+   deepClone(data,newdata);
+   console.log(data);
+   console.log(newdata);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

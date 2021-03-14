@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var data = {
+              age: 18,
+              name: "liuruchao",
+              education: ["小学", "初中", "高中", "大学", undefined, null],
+              likesFood: new Set(["fish", "banana"]),
+              friends: [
+                    { name: "summer",  sex: "woman"},
+                    { name: "daWen",   sex: "woman"},
+                    { name: "yang",    sex: "man" }  ], 
+              work: { 
+                      time:2020
+                      }, 
+            project: { name: "test",obtain: ["css", "html", "js"]} ,
+              play: function() {   console.log("玩滑板");  },
+          }
+        let temp,key,temp1,key1;
+        let obj=JSON.parse(JSON.stringify(data));    //data深拷贝给obj，obj和data的地址已经不同
+        for(let k in data){                 //遍历data并保存Set型数据的属性名和属性值
+        if(data[k] instanceof Set){
+            temp=data[k];
+            key=k;
+        }
+        if( data[k] instanceof Function){           //JSON无法深拷贝函数，所以保存data的函数
+            temp1=data[k];
+            key1=k;
+        }
+      }
+        for(let k in obj){           
+            if(obj[k] instanceof Array){        // 遍历obj，是数组的话直接赋值（因地址不同，所以是深拷贝）
+                obj[k]=data[k];
+            }
+        else if(k==key){                  //找到Set型的数据后，赋值
+             obj[k]=temp;
+         }
+        }
+        obj[key1]=temp1;           //将data的函数赋值给obj
+        console.log(typeof data.play);
+        console.log(data);
+        console.log(obj);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

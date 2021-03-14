@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const user={
+            name:"John",
+            years:30,
+        };
+    const{ name,
+           years:age,
+           isAdmin} = user;
+        console.log(name);
+        console.log(age);
+        if(isAdmin){          //isAdmin非空，则输出isAdmin的值
+        console.log(isAdmin);
+        }
+        else             //若isAdmin属性缺失则输出false
+        console.log(Boolean(isAdmin));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
